@@ -79,13 +79,19 @@ const availableBooks = books.filter((e) => {
 });
 console.log(availableBooks);
 
-const discountedBooks = availableBooks.map((e) => {
+/* const discountedBooks = availableBooks.map((e) => {
   return (parseFloat(e.price) * 0.8).toFixed(2);
+});
+console.log(discountedBooks); */
+
+const discountedBooks = availableBooks.map((e) => {
+  const prezzoScontato = (parseFloat(e.price) * 0.8).toFixed(2);
+  return { ...e, price: `${prezzoScontato}€` }; //correzione, mancava l oggetto, io avevo solo i prezzi
 });
 console.log(discountedBooks);
 
 const fullPricedBook = discountedBooks.find((e) => {
-  return e % 1 === 0;
+  return parseFloat(e.price) % 1 === 0; //non va piu bene solo e % 1 === 0 perche adesso discount e un obj non piu un numero, quindi estraggo e.priece di nuovo
 });
 console.log(fullPricedBook);
 
